@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="/css/date-range-picker.css">
+  <link rel="stylesheet" href="/css/tiny-date-picker.css">
+  <link rel='stylesheet' href='/css/style.min.css' />
+</head>
+
+<body>
+  <div id="app">
+    <section class="todo-wrapper">
+      <h1 class="todo-title">
+        <%= tarih %><br>
+        <%= gun %>
+      </h1>
+      <form name="todoAdd" action="/create" method="post">
+        <input name="issue" id="issue" type="text" class="input-todo" placeholder="Bir kayıt oluştur..." autocomplete="off" autocorrect="off" >
+        <input name="startedDate" type="text" class="datepicker startedDate" tabindex="400" placeholder="Başlangıç Tarihi" autocomplete="off" autocorrect="off" />
+        <input name="endDate" type="text" class="datepicker endDate" tabindex="400" placeholder="Bitiş Tarihi" autocomplete="off" autocorrect="off" />
+        <button type="submit" class="btn btn-add">+</button>
+      </form>
+
+      <ul class="todo-list">
+        <% for(var i=0; i < workList.length; i++) { %>
+          <% if(workList[i].status=="0" ){ %>
+        <li class="bitmemis">
+          <a style="color:#666; text-decoration:none;" href="/update/<%= workList[i].id %>">
+            <input id="item_<%= i %>" type="checkbox" class="todo-checkbox">
+            <label for="item_<%= i %>"></label>
+            <span class="todo-text block"><%= workList[i].desc %></span>
+            <span class="todo-text inline-block started_date"><strong>Başlangıç :</strong> <%= moment(workList[i].startedDate).format('DD.mm.YYYY')  %></span>
+            <span class="todo-text inline-block end_date"><strong>Bitiş :</strong> <%= moment(workList[i].endDate).format('DD.mm.YYYY') %></span>
+            <a href="/delete/<%= workList[i].id %>" class="delete"></a>
+            <a href="/edit/<%= workList[i].id %>" class="edit"></a>
+          </a>
+          </li>
+        <% }} %>
+      </ul>
+      <div class="completed-task-area">
+        <strong class="status">Tamamlanan Görevler: <%= taskPercent %>%</strong>
+        <ul class="todo-list complete-task">
+          <% for(var i=0; i < workList.length; i++) { %>
+            <% debugger; %>
+            <% if(workList[i].status=="1" ){ %>
+          <li class="bitmis">
+              <input id="item_<%= i %>" type="checkbox" class="todo-checkbox">
+              <label for="item_<%= i %>"></label>
+              <span class="todo-text block"><%= workList[i].desc %></span>
+              <span class="todo-text inline-block started_date"><strong>Başlangıç :</strong> <%= moment(workList[i].startedDate).format('DD.mm.YYYY')  %></span>
+              <span class="todo-text inline-block end_date"><strong>Bitiş :</strong> <%= moment(workList[i].endDate).format('DD.mm.YYYY') %></span>
+              <a href="/delete/<%= workList[i].id %>" class="delete"></a>
+              <a href="/edit/<%= workList[i].id %>" class="edit"></a>
+            </li>
+          <% }} %>
+        </ul>
+      </div>
+      <div class="control-buttons">
+        <div class="btn btn-secondary completed-task show">tamamlanmış görevleri göster</div>
+        <div class="btn btn-secondary completed-task hide">tamamlanmış görevleri gizle</div>
+      </div>
+    </section>
+  </div>
+  <footer>
+    View on Project Node.js ToDo App List<br>
+    Made with fatihdemir
+  </footer>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
+  <script src="./javascripts/date-range-picker.min.js"></script>
+  <script type="text/javascript" src="./javascripts/script.js"></script>
+</body>
+
+</html>

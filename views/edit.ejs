@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="/css/date-range-picker.css">
+  <link rel="stylesheet" href="/css/tiny-date-picker.css">
+  <link rel='stylesheet' href='/css/style.min.css' />
+</head>
+
+<body>
+  <div id="app">
+    <section class="todo-wrapper">
+      <h1 class="todo-title">
+        <%= tarih %><br>
+        <%= gun %>
+      </h1>
+      <form name="todoUpdate" action="/edit/<%= id %> %>" method="post">
+        <input name="issue" id="issue" type="text" class="input-todo" placeholder="Bir kayıt oluştur..." autocomplete="off" autocorrect="off" value="<%= desc %>">
+        <div class="radio-grup">
+          <input id="status0" type="radio" name="status" value="0" <% if(status =="0"){ %> checked="checked" <% } %> >
+          <label for="status0">Tamamlanmadı</label>
+          <input id="status1" type="radio" name="status" value="1" <% if(status =="1"){ %> checked="checked" <% } %>>
+          <label for="status1">Tamamlandı</label>
+        </div>
+        <input name="startedDate" type="text" class="datepicker startedDate" tabindex="400" placeholder="Başlangıç Tarihi" autocomplete="off" autocorrect="off" value="<%= moment(startedDate).format('DD.mm.YYYY') %>" />
+        <input name="endDate" type="text" class="datepicker endDate" tabindex="400" placeholder="Bitiş Tarihi" autocomplete="off" autocorrect="off" value="<%= moment(endDate).format('DD.mm.YYYY') %>" />
+        <button type="submit" class="btn btn-add save"><span class="save-icon"></span></button>
+      </form>
+    </section>
+  </div>
+  <footer>
+    View on Project Node.js ToDo App List<br>
+    Made with fatihdemir
+  </footer>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
+  <script src="/javascripts/date-range-picker.min.js"></script>
+  <script type="text/javascript" src="/javascripts/script.js"></script>
+</body>
+
+</html>
